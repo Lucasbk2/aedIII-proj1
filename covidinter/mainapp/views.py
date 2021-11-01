@@ -6,4 +6,4 @@ from django.http import HttpResponse
 class MainPage(View):
 
     def get(self,request):
-        return HttpResponse('Iniciando Projeto')
+        return render(request,'mainapp/page.html')
