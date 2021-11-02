@@ -12,9 +12,24 @@
 
         <div class="row">
             <div class="col s12 m12 l12" style="padding-bottom:5%"></div>
-            <div class="col s12 m12 l12" style="text-align:center;">
-                Inicio
+            <div class="col s12 m12 l12" style="text-align:center;padding-bottom:10px;">
+                <form action="/" method="post">
+                {% csrf_token %}
+                    <label>Escolha a ordenação dos dados:</label>
+                        <select name="select" style="display: inline; width: 200px;">
+
+                            {% for x in tipos_ordenacao%}
+                                <option name="select" value="{{x}}">{{x}}</option>
+                            {%endfor%}
+                        </select>
+                    <button class="waves-effect waves-light blue btn-small" type="submit">Realizar Ordenação</button>
+                </form>
             </div>
+            <div class="col s12 m12 l12" style="text-align:center;padding-bottom:10px;">
+                <button class="waves-effect waves-light blue btn-small">Realiar Busca</button>
+            </div>
+
+
 
         </div>
 
