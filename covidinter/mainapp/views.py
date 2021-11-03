@@ -13,13 +13,23 @@ class MainPage(View):
 
     def post(self, request):
         context = {'tipos_ordenacao': self.tipos_ordenacao}
-        realiza_ordenacao(request.POST['select'])
+        for envio in request.POST:
+            if envio == 'ordenar':
+                lista,valor = realiza_ordenacao(request.POST['ordenar'])
+                request.session['lista'] = lista
+                request.session['valor'] = valor
+            elif envio == 'buscar':
+                realiza_busca_binaria(request.session['lista'],request.session['valor'])
         return render(request, 'mainapp/page.html', context)
 
     def get(self, request):
+
         context = {'tipos_ordenacao': self.tipos_ordenacao}
         return render(request, 'mainapp/page.html', context)
 
+
+def realiza_busca_binaria(listas,index):
+    pass
 
 def realiza_ordenacao(tipo):
     linhas, index = extrair_csv(tipo)
@@ -38,7 +48,7 @@ def realiza_ordenacao(tipo):
         if verificacao == False:
             ordenacao = False
 
-    return linhas
+    return linhas, index
 
 
 def extrair_csv(tipo):

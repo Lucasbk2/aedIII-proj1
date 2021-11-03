@@ -16,17 +16,21 @@
                 <form action="/" method="post">
                 {% csrf_token %}
                     <label>Escolha a ordenação dos dados:</label>
-                        <select name="select" style="display: inline; width: 200px;">
+                        <select name="ordenar" style="display: inline; width: 200px;">
 
                             {% for x in tipos_ordenacao%}
-                                <option name="select" value="{{x}}">{{x}}</option>
+                                <option name="ordenar" value="{{x}}">{{x}}</option>
                             {%endfor%}
                         </select>
                     <button class="waves-effect waves-light blue btn-small" type="submit">Realizar Ordenação</button>
                 </form>
             </div>
             <div class="col s12 m12 l12" style="text-align:center;padding-bottom:10px;">
-                <button class="waves-effect waves-light blue btn-small">Realiar Busca</button>
+                <form action="/" method="post">
+                    {% csrf_token %}
+                    <input name="buscar" style="width:100px; margin-left:230px"/>
+                    <button class="waves-effect waves-light blue btn-small">Realiar Busca</button>
+                </form>
             </div>
 
 
