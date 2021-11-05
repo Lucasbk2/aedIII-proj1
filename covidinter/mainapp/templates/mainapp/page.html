@@ -32,6 +32,12 @@
                     <button class="waves-effect waves-light blue btn-small">Realiar Busca</button>
                 </form>
             </div>
+            <div class="col s12 m12 l12" style="text-align:center;padding-bottom:10px;">
+                {%for busca in dados_busca%}
+                    {{busca}}
+                    <br>
+                {%endfor%}
+            </div>
 
 
 

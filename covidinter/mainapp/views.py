@@ -19,7 +19,8 @@ class MainPage(View):
                 request.session['lista'] = lista
                 request.session['valor'] = valor
             elif envio == 'buscar':
-                realiza_busca_binaria(request.session['lista'], request.session['valor'])
+                dados_busca = realiza_busca(request.session['lista'], request.session['valor'],request.POST['buscar'])
+                context = {'tipos_ordenacao': self.tipos_ordenacao,'dados_busca': dados_busca}
         return render(request, 'mainapp/page.html', context)
 
     def get(self, request):
@@ -28,9 +29,17 @@ class MainPage(View):
         return render(request, 'mainapp/page.html', context)
 
 
-# Realiza busca binario
-def realiza_busca_binaria(listas, index):
-    pass
+# Utilizado busca liner devido a possibilidade de elementos repetidos
+def realiza_busca(listas, index, busca):
+    resultados = []
+    for x in range(len(listas)):
+        if float(listas[x][index]) == int(busca):
+            resultados.append(listas[x])
+
+    return resultados
+
+
+
 
 
 # Ordenação por Merge Sort
