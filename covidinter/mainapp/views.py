@@ -15,11 +15,11 @@ class MainPage(View):
         context = {'tipos_ordenacao': self.tipos_ordenacao}
         for envio in request.POST:
             if envio == 'ordenar':
-                lista,valor = realiza_ordenacao(request.POST['ordenar'])
+                lista, valor = realiza_ordenacao(request.POST['ordenar'])
                 request.session['lista'] = lista
                 request.session['valor'] = valor
             elif envio == 'buscar':
-                realiza_busca_binaria(request.session['lista'],request.session['valor'])
+                realiza_busca_binaria(request.session['lista'], request.session['valor'])
         return render(request, 'mainapp/page.html', context)
 
     def get(self, request):
@@ -28,30 +28,53 @@ class MainPage(View):
         return render(request, 'mainapp/page.html', context)
 
 
-def realiza_busca_binaria(listas,index):
+# Realiza busca binario
+def realiza_busca_binaria(listas, index):
     pass
 
-def realiza_ordenacao(tipo):
-    linhas, index = extrair_csv(tipo)
 
-    ordenacao = True
-    verificacao = False
-    while ordenacao:
-        verificacao = False
-        for x in range(len(linhas) - 1):
-            aux = 0
-            if linhas[x][index] > linhas[x + 1][index]:
-                aux = linhas[x]
-                linhas[x] = linhas[x + 1]
-                linhas[x + 1] = aux
-                verificacao = True
-        if verificacao == False:
-            ordenacao = False
+# Ordenação por Merge Sort
+# tipo = tipo da ordenação selecionada pelo usuário, Buscar por Mortes, Quantidades de casos ...
+def realiza_ordenacao(tipo):
+    linhas, index = extrair_dados_csv(tipo)
+
+    # Faz a 'mesclagem' das arrays esqueda/direita as ordenando
+    def mergeArray(esq, dir, indexDados):
+        final = []
+        aux, aux2 = 0, 0
+        # Realizar comparação dos valores e determina ordem que será adicionado no final
+        while aux < len(esq) and aux2 < len(dir):
+            if esq[aux][indexDados] <= dir[aux2][indexDados]:
+                final.append(esq[aux])
+                aux += 1
+            else:
+                final.append(dir[aux2])
+                aux2 += 1
+
+        final += esq[aux:]
+        final += dir[aux2:]
+        return final
+
+    def mergesort(vetor, indexDados):
+        if (len(vetor) <= 1):  # ordenado
+            return vetor
+        centro = int(len(vetor) / 2)
+        # separação esqueda
+        esq = mergesort(vetor[:centro], indexDados)
+        # separação direita
+        dir = mergesort(vetor[centro:], indexDados)
+
+        return mergeArray(esq, dir, indexDados)
+
+    # Teste em minimundo
+    # linhasteste = [[1, 8], [2, 4], [3, 1], [4, 5], [5, 2], [6, 7], [7, 9], [8, 3], ]
+    # linhas = mergesort(linhasteste,1)
+    linhas = mergesort(linhas, index)
 
     return linhas, index
 
 
-def extrair_csv(tipo):
+def extrair_dados_csv(tipo):
     linhas = []  # Armazena as linhas do csv
     if tipo == 'Novos Casos':
         tipo = 'new_cases'
@@ -70,11 +93,13 @@ def extrair_csv(tipo):
     header = next(csvreader).index(tipo)  # Armazena o index da coluna que será utilizada
 
     for linha in csvreader:
-        #Caso dado irrelevante para ordenação, não o armazena
+        # Caso dado irrelevante para ordenação, não o armazena
         if linha[header] == "NA":
             pass
         else:
-            linhas.append(linha)
+            # Valida para que não tenha dados negativos
+            if not float(linha[header]) < 0:
+                linhas.append(linha)
 
     arquivo.close()
 
