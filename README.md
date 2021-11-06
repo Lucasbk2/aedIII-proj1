@@ -45,6 +45,7 @@ Irá Retornar as colunas do arquivo csv junto com os dados ordenados por filtrag
 ![Figura 3](./covidinter/mainapp/static/mainapp/images/c3.png)
 
 #Algortimo
+
 Complexidade Big O(Merge Sort + Busca Linear) = O(n log n + n)
 
 Algoritmo de ordenação(Merge Sort): 'covidinter/mainapp/views.py/realiza_ordenacao/mergesort'
