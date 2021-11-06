@@ -5,7 +5,10 @@ Objetivo do projeto é implementar 2 algoritmos(Busca/ordenação) em cima de um
 Será utilizada neste projeto a base de dados fornecida pelo governo do canadá relacionado ao covid em escala global.
 
 https://health-infobase.canada.ca/covid-19/international/
-#Execução
+
+#
+- Execução
+
 python >= 3.7 and python <= 3.9
 
 git clone https://github.com/Lucasbk2/aedIII-proj1.git
@@ -20,7 +23,7 @@ python manage.py collectstatic
 
 python manage.py runserver
 
-##Projeto
+- Projeto
 
 Ao selecionar o tipo de ordenação e "Realizar Ordenação", o sistema irá organizar o vetor para a realização da busca, além disso, ele ira fazer 10 ordenações/buscas para determinar a velocidade do algortimo como na figura 2.
 
@@ -44,7 +47,7 @@ Irá Retornar as colunas do arquivo csv junto com os dados ordenados por filtrag
 
 ![Figura 3](./covidinter/mainapp/static/mainapp/images/c3.png)
 
-#Algortimo
+- Algortimos e Complexidade
 
 Complexidade Big O(Merge Sort + Busca Linear) = O(n log n + n)
 
