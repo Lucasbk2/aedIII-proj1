@@ -26,6 +26,7 @@ Ao selecionar o tipo de ordenação e "Realizar Ordenação", o sistema irá org
 
 ![Figura 1](./covidinter/mainapp/static/mainapp/images/c1.png)
 Figura 1
+
 ![Figura 2](./covidinter/mainapp/static/mainapp/images/c2.png)
 Figura 2
 
