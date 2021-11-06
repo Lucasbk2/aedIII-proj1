@@ -2,4 +2,4 @@ venv/
 **/.idea/
 /covidinter/static/
 /covidinter/db.sqlite3
-/covidinter/covidinter/.env
+!/covidinter/covidinter/.env

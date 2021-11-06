@@ -19,7 +19,11 @@
                         <select name="ordenar" style="display: inline; width: 200px;">
 
                             {% for x in tipos_ordenacao%}
-                                <option name="ordenar" value="{{x}}">{{x}}</option>
+                                {% if ordenacao_selecionada == x%}
+                                    <option name="ordenar" value="{{x}}" selected>{{x}}</option>
+                                {%else%}
+                                    <option name="ordenar" value="{{x}}">{{x}}</option>
+                                {%endif%}
                             {%endfor%}
                         </select>
                     <button class="waves-effect waves-light blue btn-small" type="submit">Realizar Ordenação</button>
@@ -28,15 +32,31 @@
             <div class="col s12 m12 l12" style="text-align:center;padding-bottom:10px;">
                 <form action="/" method="post">
                     {% csrf_token %}
-                    <input name="buscar" style="width:100px; margin-left:230px"/>
-                    <button class="waves-effect waves-light blue btn-small">Realiar Busca</button>
+                    <input name="buscar" value="{{busca}}" style="width:100px; margin-left:230px"/>
+                    <button class="waves-effect waves-light blue btn-small">Realizar Busca</button>
                 </form>
             </div>
+            {%if tempos%}
             <div class="col s12 m12 l12" style="text-align:center;padding-bottom:10px;">
+                {% for tempo in tempos%}
+                    <h5>{{tempo}}</h5>
+                {%endfor%}
+            </div>
+            {% endif %}
+            <div class="col s12 m12 l12" style="text-align:center;padding-bottom:10px;">
+
+                {%if dados_busca%}
+                <h5>Colunas</h5>
+                    {%for x in colunas%}
+                    {{x}},
+                {%endfor%}<br>
+                <h5>Registros Filtrados</h5>
                 {%for busca in dados_busca%}
                     {{busca}}
                     <br>
                 {%endfor%}
+
+                {%endif%}
             </div>
 
 
