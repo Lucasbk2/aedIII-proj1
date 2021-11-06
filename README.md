@@ -25,9 +25,11 @@ python manage.py runserver
 Ao selecionar o tipo de ordenação e "Realizar Ordenação", o sistema irá organizar o vetor para a realização da busca, além disso, ele ira fazer 10 ordenações/buscas para determinar a velocidade do algortimo como na figura 2.
 
 ![Figura 1](./covidinter/mainapp/static/mainapp/images/c1.png)
+
 Figura 1
 
 ![Figura 2](./covidinter/mainapp/static/mainapp/images/c2.png)
+
 Figura 2
 
 Melhor Caso: Melhor tempo de execução.
